@@ -1,4 +1,4 @@
-# 2D-Lid-driven-cavity
+# 2D Lid-driven cavity
 
 2D LDC solver using FVM. Hybrid differencing scheme for convection-diffusion, 
 SIMPLE algorithm for pressure velocity coupling. SOR (Successive Over Relaxation) 
