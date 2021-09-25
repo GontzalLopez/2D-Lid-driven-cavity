@@ -41,55 +41,55 @@ double max3(double a, double b, double c)
 
 int main()
 {
-	//Cavity dimensions
-	double Lx=1; 
-	double Ly=1;
-	double dx=Lx/nx;
-	double dy=Ly/ny;
+//Cavity dimensions
+double Lx=1; 
+double Ly=1;
+double dx=Lx/nx;
+double dy=Ly/ny;
 
-	double mu=0.01;
-	double rho=1.0;
+double mu=0.01;
+double rho=1.0;
 
-	//relaxation parameters
-    double alphap = 0.4;
-    double alpha = 0.8;
-	int itP=200;
-	int uvIt=12;
+//relaxation parameters
+double alphap = 0.4;
+double alpha = 0.8;
+int itP=200;
+int uvIt=12;
 
-	double contError;
-	double Fw_x,Fe_x,Fs_x,Fn_x,Dw_x,De_x,Ds_x,Dn_x;
-	double Fw_y,Fe_y,Fs_y,Fn_y,Dw_y,De_y,Ds_y,Dn_y;
-	double ae[ny+2][nx+2]={0.0};
-	double aw[ny+2][nx+2]={0.0};
-	double an[ny+2][nx+2]={0.0};
-	double as[ny+2][nx+2]={0.0};
-	double aPu[ny+2][nx+2];
-	double aPv[ny+2][nx+2];
-	double aPp[ny+2][nx+2];
-	setOne(aPu);
-	setOne(aPv);
-	setOne(aPp);
-	
-	int un=1.0; //north inlet BC [m/s]
-	double u[ny+2][nx+1]={0.0};
-	double uStar[ny+2][nx+1]={0.0};
-	double uNew[ny+2][nx+1]={0.0};
-	double uFinal[ny+1][nx+1]={0.0};
-	
-	double v[ny+1][nx+2]={0.0};
-	double vStar[ny+1][nx+2]={0.0};
-	double vNew[ny+1][nx+2]={0.0};
-    double vFinal[ny+1][nx+1]={0.0};
-	
-	double du[ny+2][nx+1]={0.0};
-	double dv[nx+1][nx+2]={0.0};
-	
+double contError;
+double Fw_x,Fe_x,Fs_x,Fn_x,Dw_x,De_x,Ds_x,Dn_x;
+double Fw_y,Fe_y,Fs_y,Fn_y,Dw_y,De_y,Ds_y,Dn_y;
+double ae[ny+2][nx+2]={0.0};
+double aw[ny+2][nx+2]={0.0};
+double an[ny+2][nx+2]={0.0};
+double as[ny+2][nx+2]={0.0};
+double aPu[ny+2][nx+2];
+double aPv[ny+2][nx+2];
+double aPp[ny+2][nx+2];
+setOne(aPu);
+setOne(aPv);
+setOne(aPp);
 
-	double p[ny+2][nx+2];
-	double pc[ny+2][nx+2]={0.0};
-	setOne(p);
-	double pFinal[nx+1][ny+1]={0.0};
-	double b[nx+2][ny+2]={0.0};
+int un=1.0; //north inlet BC [m/s]
+double u[ny+2][nx+1]={0.0};
+double uStar[ny+2][nx+1]={0.0};
+double uNew[ny+2][nx+1]={0.0};
+double uFinal[ny+1][nx+1]={0.0};
+
+double v[ny+1][nx+2]={0.0};
+double vStar[ny+1][nx+2]={0.0};
+double vNew[ny+1][nx+2]={0.0};
+double vFinal[ny+1][nx+1]={0.0};
+
+double du[ny+2][nx+1]={0.0};
+double dv[nx+1][nx+2]={0.0};
+
+
+double p[ny+2][nx+2];
+double pc[ny+2][nx+2]={0.0};
+setOne(p);
+double pFinal[nx+1][ny+1]={0.0};
+double b[nx+2][ny+2]={0.0};
 	
 //coordinates&directions:
 
@@ -98,23 +98,23 @@ int main()
 //j=0 left column 
 //j=max rigth column 
 
-	//u velocity inlet BC
-	for(int j = 0; j<(nx+1); j++)
-	{
-		u[0][j]=1;     // north inlet
-		uStar[0][j]=1;     // north inlet		
-	}
+//u velocity inlet BC
+for(int j = 0; j<(nx+1); j++)
+{
+	u[0][j]=1;     // north inlet
+	uStar[0][j]=1;     // north inlet		
+}
 
-	// Start loop
+// Start loop
 
-	cout<<"Starting time loop..."<<endl;
+cout<<"Starting time loop..."<<endl;
 
-   double error=1;
-   double error_req=1e-07;
-   int itnum=1;
+double error=1;
+double error_req=1e-07;
+int itnum=1;
 
-   while(error>error_req)
-   {
+while(error>error_req)
+{
 	cout<<"Iteration Number : "<<itnum<<endl;
 
 		//x momentum
@@ -219,7 +219,7 @@ int main()
 					
 			
 		//SOR algorithm with w=1.7 for pressure
-        for(int k=1;k<=itP;k++)
+       		 for(int k=1;k<=itP;k++)
 		{
 			for(int i=1;i<ny+1;i++)
 			{
@@ -231,9 +231,9 @@ int main()
 		}
 
 		//Pressure correction
-        for(int i=1;i<ny+1;i++)
+       	        for(int i=1;i<ny+1;i++)
 		{
-            for(int j=1;j<nx+1;j++)
+           		 for(int j=1;j<nx+1;j++)
 			{
 				p[i][j]=p[i][j]+alphap*pc[i][j];
 			}
@@ -274,9 +274,8 @@ int main()
 				v[i][j]=vStar[i][j];
 			}
 		}
-
-	itnum++;
-	}//end iteration
+itnum++;
+}//end iteration
 
 cout<<"End calculation"<<endl;
 
@@ -286,87 +285,87 @@ cout<<"End calculation"<<endl;
 
 //Velocity interpolation
 
-	for(int i=0;i<ny+1;i++)
+for(int i=0;i<ny+1;i++)
+{
+	for(int j=0;j<nx+1;j++)
 	{
-		for(int j=0;j<nx+1;j++)
-		{
-		 uFinal[i][j]=0.5*(u[i][j]+u[i+1][j]);
-		 vFinal[i][j]=0.5*(v[i][j]+v[i][j+1]);
-		 pFinal[i][j]=0.25*(p[i][j]+p[i][j+1]+p[i+1][j]+p[i+1][j+1]);
-		}
+	 uFinal[i][j]=0.5*(u[i][j]+u[i+1][j]);
+	 vFinal[i][j]=0.5*(v[i][j]+v[i][j+1]);
+	 pFinal[i][j]=0.25*(p[i][j]+p[i][j+1]+p[i+1][j]+p[i+1][j+1]);
 	}
+}
 
 //Output files
 
-	FILE *fdata;
-	fdata = fopen("./post/dataCavity.dat","w+t");
+FILE *fdata;
+fdata = fopen("./post/dataCavity.dat","w+t");
 
-	if ( fdata == NULL )
+if ( fdata == NULL )
+{
+	printf("\nERROR when opening file\n");
+	fclose( fdata );
+}
+else
+{
+//	fprintf( fdata, "Xcoord   Ycoord  Uvelocity\n");
+
+	for (int j = 0;j<(nx+1);j++)
 	{
-		printf("\nERROR when opening file\n");
-		fclose( fdata );
-	}
-    else
-	{
-	//	fprintf( fdata, "Xcoord   Ycoord  Uvelocity\n");
-        
-		for (int j = 0;j<(nx+1);j++)
-		{
-	        double xCoord=j*dx;
-			
-			for (int i = ny;i>=0;i--)
-			{
-				double yCoord=(ny-i)*dy;
-				fprintf( fdata, "%5.8lf\t%5.8lf\t%5.8lf\t%5.8lf\t%5.8lf\n", xCoord,yCoord,uFinal[i][j],vFinal[i][j],pFinal[i][j]);
-			}
-			fprintf(fdata,"\n");
-		}	
-	}
+	double xCoord=j*dx;
 
-	fclose(fdata);
-	
-	    // OUTPUT DATA
-	//FILE *fdata;
-	fdata = fopen("./post/dataCavity_prof.dat","w+t");
-
-	if ( fdata == NULL )
-	{
-		printf("\nERROR when opening file\n");
-		fclose( fdata );
-	}
-    else
-	{
-	//	fprintf( fdata, "Xcoord   Ycoord  Uvelocity\n");
-        
-		for (int j = 0;j<(nx+1);j++)
-		{
-	        double xCoord=j*dx;
-			fprintf( fdata, "%5.8lf\t%5.8lf\t%5.8lf\n", xCoord,uFinal[50][j],vFinal[50][j]);
-		}	
-	}
-
-	fclose(fdata);
-
-
-	//FILE *fdata;
-	fdata = fopen("./post/dataCavity_uExp.dat","w+t");
-
-	if ( fdata == NULL )
-	{
-		printf("\nERROR when opening file\n");
-		fclose( fdata );
-	}
-    else
-	{
-	//	fprintf( fdata, "Xcoord   Ycoord  Uvelocity\n");
-        
 		for (int i = ny;i>=0;i--)
 		{
 			double yCoord=(ny-i)*dy;
-			fprintf( fdata, "%5.8lf\t%5.8lf\n", yCoord,uFinal[i][50]);
-		}	
-	}
+			fprintf( fdata, "%5.8lf\t%5.8lf\t%5.8lf\t%5.8lf\t%5.8lf\n", xCoord,yCoord,uFinal[i][j],vFinal[i][j],pFinal[i][j]);
+		}
+		fprintf(fdata,"\n");
+	}	
+}
 
-	fclose(fdata);
+fclose(fdata);
+
+    // OUTPUT DATA
+//FILE *fdata;
+fdata = fopen("./post/dataCavity_prof.dat","w+t");
+
+if ( fdata == NULL )
+{
+	printf("\nERROR when opening file\n");
+	fclose( fdata );
+}
+else
+{
+//	fprintf( fdata, "Xcoord   Ycoord  Uvelocity\n");
+
+	for (int j = 0;j<(nx+1);j++)
+	{
+	double xCoord=j*dx;
+		fprintf( fdata, "%5.8lf\t%5.8lf\t%5.8lf\n", xCoord,uFinal[50][j],vFinal[50][j]);
+	}	
+}
+
+fclose(fdata);
+
+
+//FILE *fdata;
+fdata = fopen("./post/dataCavity_uExp.dat","w+t");
+
+if ( fdata == NULL )
+{
+	printf("\nERROR when opening file\n");
+	fclose( fdata );
+}
+else
+{
+//	fprintf( fdata, "Xcoord   Ycoord  Uvelocity\n");
+
+	for (int i = ny;i>=0;i--)
+	{
+		double yCoord=(ny-i)*dy;
+		fprintf( fdata, "%5.8lf\t%5.8lf\n", yCoord,uFinal[i][50]);
+	}	
+}
+
+fclose(fdata);
 }
 
