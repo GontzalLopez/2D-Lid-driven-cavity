@@ -196,7 +196,7 @@ while(error>error_req)
 				for(int j=1;j<nx+1;j++)
 				{
 					b[i][j]=(uStar[i][j]-uStar[i][j-1])*dy+(vStar[i-1][j]-vStar[i][j])*dx;			
-                    error=error+b[i][j]*b[i][j];					
+                    			error=error+b[i][j]*b[i][j];					
 				}
 			}
 
